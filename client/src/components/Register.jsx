@@ -37,7 +37,7 @@ const Register = () => {
         } else {
             window.alert("Successful Registration")
 
-            navigateTo.push("/login")
+            navigateTo("/login")
         }
     }
 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css'
 
 const Login = () => {
     const navigateTo = useNavigate();
     const [user, setUser] = useState({
-        mobilenumber: "", password: ""
+        email: "", password: ""
     });
 
     let fieldName, fieldValue;
@@ -19,7 +19,7 @@ const Login = () => {
     const PostData = async (e) => {
         e.preventDefault();
 
-        const { mobilenumber, password } = user;
+        const { email, password } = user;
 
         const res = await fetch('/api/login', {
             method: "POST",
@@ -27,19 +27,19 @@ const Login = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                mobilenumber, password
+                email, password
             })
         });
 
-        // const data = await res.json();
+        const data = await res.json();
 
-        // if (data.status === 422 || !data) {
-        //   window.alert("Invalid Registration");
-        // } else {
-        //   window.alert("Successful Registration")
+        if (data.status === 400 || !data) {
+            window.alert("Invalid Credentials");
+        } else {
+            window.alert("Logged In Successfully")
 
-        //   navigateTo.push("/login")
-        // }
+            navigateTo("/")
+        }
     }
     return (
         <div className="form-group">
@@ -47,8 +47,8 @@ const Login = () => {
             <form method='POST' className='container'>
                 <h1 className=''>Login</h1>
                 <div className="form-floating mb-3">
-                    <input type="number" className="form-control" name='mobilenumber' value={user.mobilenumber} onChange={handleInputs} id="floatingInput" placeholder="93136*****" />
-                    <label htmlFor="floatingInput">Mobile Number</label>
+                    <input type="email" className="form-control" name='email' value={user.email} onChange={handleInputs} id="floatingInput" placeholder="93136*****" />
+                    <label htmlFor="floatingInput">Email</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input type="password" className="form-control" name='password' value={user.password} onChange={handleInputs} id="floatingPassword" placeholder="Password" />
