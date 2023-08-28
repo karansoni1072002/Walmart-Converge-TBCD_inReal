@@ -1,0 +1,24 @@
+.scannerMainDiv {
+    text-align: center;
+}
+
+.scannerDiv {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 504px;
+}
+
+#scannerPaper {
+    border: 2px solid black;
+    height: 504px;
+}
+
+.scannerTextArea {
+    width: auto;
+    /* height: fit-content; */
+    text-align: center;
+    margin: auto;
+    margin-top: 1rem;
+    position: relative;
+}
